@@ -1,0 +1,4 @@
+
+
+SUBDIRS = boot logging iogen misc gui noclick sound
+

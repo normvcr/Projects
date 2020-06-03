@@ -1,0 +1,12 @@
+getline()
+Copyright © 2020 - Paul Silisteanu
+https://solarianprogrammer.com/2019/04/03/c-programming-read-file-lines-fgets-ge
+tline-implement-portable-getline
+
+dirent.h
+Copyright (C) 2006-2012 Toni Ronkko
+This file is part of dirent.  Dirent may be freely distributed
+under the MIT license.  For all details and documentation, see
+https://github.com/tronkko/dirent
+
+

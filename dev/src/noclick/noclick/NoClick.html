@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head profile="http://www.w3.org/2005/10/profile">
+    
+<!––    ––>
+
+<style>
+
+h2 { color: red }
+</style>
+
+</head>
+<body>
+  <h1>NoClick Help File</h1>
+  Settings may end with "_units".  The units are
+  <ul>
+<li> ms = milliseconds    </ll>
+  <li> pix = screen pixels </ll> 
+  <li> deg = degrees </ll> 
+</ul>
+
+<p> Colours are specified as #RRGGBB, with 6 hexidecimal digits.
+  </p>
+
+
+  <h2>Mouse</h2>
+	     <h3>timeInterval_ms [integer] </h3>
+This is the sampling rate at which the mouse is querried for its position.  The variable, <em>stationaryDuration_</em>, is incremented to indicate how many milliseconds the mouse has been stationary for.  It is reset to 0 when the mouse has not been stationary.
+
+	     <h3>stationaryThreshold_ms [integer] </h3>
+	     This is how long the mouse must be stationary before it can activate a button.
+
+	     <h2>HotCursor</h2>
+	     <h3>semiWidth_pix [integer] </h3>
+The cursor is square.  The side length is 1 + 2 * semiWidth.
+  <h3> color [string] </h3>
+The colour of the two cross-hairs of the cursor.
+
+  <h3> inset_pix  [integer] </h3>
+  The cursor is a cross-hair.  The inset is how far each of the 4 arms keeps from the centre.  An inset of 0 is a full cross.
+
+  <h3> show  [boolean]</h3>
+  Set to, false, to hide the cross-hair.  It can interfere with screen work.
+
+ <h2>HotKey</h2>
+  The hot key toggles between Hide and Show i.e an active and inactive system.
+  <h3>modifiers</h3>
+  The modifier mask for the hot key. Shift=1, Ctl=2, Alt=4.  A mask of value -1 indicates that there is no hot key.
+  <h3>key</h3>
+  The platform-specific key code for the hot key.  
+ 
+
+  <h2>Label</h2>
+  <h3>timeInterval_ms [integer]</h3>
+  This is how often the variable, <em>stationaryDuration_</em>, is checked to see if the mouse is stationary.  The labels/buttons in the GUI are activated by the mouse coming to stop in the label.
+
+   <h2>Panes</h2>
+  <h3>sideLength_pix [integer]</h3>
+ Each of the 4 "click" panes is a square of this side length.
+
+  <h3>lineOffset_pix [integer]</h3>
+ How many pixels the left-most and right-most panes are displaced vertically in the Line configuration type of the click panes.
+
+  <h3>type [string]</h3>
+ Either Line or Square, for the confguration type of the click panes.
+
+  <h3>hotPointOffset_pix [integer]</h3>
+  This indicates how far the outside corner of the LeftClick pane is  from the mouse:  The line segment  joinging the outside corner and the mouse is the hypotenuse of an isoscelese right triangle, with each leg having length hotPointOffset.
+
+  <h3>movingBTimeCutoff_ms [integer] </h3>
+  The time interval at the start of every contiguous motion during 2-stage Drag,  after which the Red Star and Panes will be hidden.
+
+  <h3>leftClickColor [string] </h3>
+
+  <h3>rightClickColor [string] </h3>
+
+  <h3>dClickColor [string] </h3>
+
+  <h3>dragColor [string] </h3>
+The colour for the corresponding pane.
+
+  <h2>Drag</h2>
+ 
+    <h3> stopDelay_ms [integer] </h3>
+    During a drag, this is how long the mouse can be statinary for, before the drag is ended.
+
+    <h3> type [integer] </h3>
+    This is the type of drag that the Drag pane actives -- either 1 or 2, corresponding, respectively to a 1-stage Drag or a 2-stage Drag.
+
+<h3>stageColor [string]  </h3>
+The colour of the drag radio buttons when that stage of a drag is active.
+
+<h2>Star</h2>
+"Star" refers to the red box that appears on the screen (originaly planned it to be a star).
+The settings are  similar to Panes.  The ones that are different are listed, here.
+    <h3>axisAngle_deg [float]</h3>
+    In order for the Click Panes to appear, the mouse must move into the cone having its vertex at the mouse, its centre line (axis) joing with the Star, and the cone sides make an angle of, axisAngle, with the axis.
+    
+     <h3>stationaryTimeAppear_ms [int]</h3>
+    How long it takes the red box to appear, once the mouse has become stationary.  If this is too small, it causes flickering of the red box.
+     <h3>stationaryTimeCutoff_ms [int]</h3>
+    How long the red box stays visible once the mouse has become stationary.
+   <h2>Action</h2>
+    The actions are intiated from the four click panes.
+    <h3>timeInterval_ms [integer]</h3>
+    How often the action, if any, is attended to.  This setting sets a timer.
+
+    <h2>System</h2>
+ 
+     <h3>lowestLoggingLevel [integer]</h3>
+     The logging levels are
+     <ul>
+       <li>0 = Debug </li>
+       <li>1 = Info </li>
+       <li>2 = Warn </li>
+       <li>3 = Critical </li>
+      <li>4 = Fatal </li>
+       </ul>
+     These values are NOT the values of the QMsgType enumeration, as Info was added later, and its value is not in sequence of severity.  For example, if <em>lowestLoggingLevel</em> is set to 2, the only log messages recorded are those of severity Warning and hgher.
+     
+     <h3>writeIniFileNameToScreen [boolean]</h3>
+     This is a convenience, as the ini file name contains the full path to where NoClick also keeps this help file and the log file.
+
+     <h3>speedScaleFactor [double]</h3>
+     This is the value of the slider in the main GUI, and is used to scale the 5 values: starStationaryTimeCutoff, starStationaryTimeAppear, panesMovingTimeCutoff, mouseStationaryThreshold and dragStopDelay.  NoClick uses the scaled values.  A scale factor of 1 means no change.  A scale factor bigger than 1 means the system is "speeded up", as all the time intervals are decreased (the 5 values are divided by the scale factor).  The scale factor does not alter the values in the ini file -- only the values that NoClick uses.
+
+     <h2>Slider</h2>
+     This section has 16 double values for both endpoints of the 8 sliders in the GUI.
+     <ul>
+<li>dragStopMax_ms</li>
+<li>dragStopMin_ms</li>
+<li>mouseStationaryMax_ms</li>
+<li>mouseStationaryMin_ms</li>
+<li>panesMovingMax_ms -- Apparatus moving</li>
+<li>panesMovingMin_ms -- Apparatus moving</li>
+<li>panesStationaryMax_ms</li>
+<li>panesStationaryMin_ms</li>
+<li>samplerActionMax_hz</li>
+<li>samplerActionMin_hz</li>
+<li>samplerLabelMax_hz -- Sampler button</li>
+<li>samplerLabelMin_hz -- Sampler button</li>
+<li>samplerPositionMax_hz</li>
+<li>samplerPositionMin_hz</li>
+<li>starStationaryMax_ms</li>
+<li>starStationaryMin_ms</li>
+</ul>
+
+</body>
+</html>
+

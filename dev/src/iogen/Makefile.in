@@ -1,0 +1,7 @@
+
+SUBDIRS = src meconv extra
+
+ifneq ($(BUILDING_IOGEN),)
+SUBDIRS += iogen
+endif
+

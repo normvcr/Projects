@@ -1,0 +1,55 @@
+
+BIN_INST_DIR =$(DEVTOP)/bin
+LIB_INST_DIR =$(DEVTOP)/lib
+INC_INST_DIR =$(DEVTOP)/inc
+
+BINARY_OBJ_NAMES = 
+BINARY_NAME = 
+BINARIES_NAMES = 
+
+
+# /usr/lib64/pkgconfig   Qt5.pc  Qt5Gui.pc  
+# pkg-config --cflags Qt5Gui.pc 
+# Needed by QT:
+#  -fPIC (added to the bldev linux config file)
+#   /EHsc (added to the bldev windows config file)
+USR_CPPFLAGS =  \
+$(BOOST_CPPFLAGS) 
+
+USR_LIB_NAMES=
+USR_LIB_DIRS =	
+
+HEADERS=\
+$(FULL_WRAPPERS) \
+GenLogging.h \
+GenLoggingUtil.hpp \
+GenLoggingCLI.hpp \
+
+WRAPPERS = GenLogging_Simple GenLogging_Boost
+FULL_WRAPPERS = $(patsubst %, $(SOURCE_DIR)/%, $(WRAPPERS))
+
+#----------------------------------------------------
+# This is needed to circumvent the  .cpp:  rule in Makefile.inc
+$(FULL_WRAPPERS):
+	@echo Accepting wrappers
+
+.precious: $(FULL_WRAPPERS)
+#---------------------------------------------------
+
+LIBRARY_NAME = Logging
+
+LIBRARY_OBJ_NAMES = \
+GenLoggingUtil \
+$(WRAPPERS)
+
+
+
+
+
+
+
+
+
+
+
+

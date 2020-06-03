@@ -1,0 +1,45 @@
+
+
+BIN_INST_DIR =$(DEVTOP)/bin
+LIB_INST_DIR =$(DEVTOP)/lib
+INC_INST_DIR =$(DEVTOP)/inc
+
+BINARY_OBJ_NAMES = 
+BINARY_NAME = 
+BINARIES_NAMES = 
+
+
+# /usr/lib64/pkgconfig   Qt5.pc  Qt5Gui.pc  
+# pkg-config --cflags Qt5Gui.pc 
+# Needed by QT:
+#  -fPIC (added to the bldev linux config file)
+#   /EHsc (added to the bldev windows config file)
+USR_CPPFLAGS = \
+-DQT_GUI_LIB -I$(QT_INC_DIR)/QtGui -I$(QT_INC_DIR) -DQT_CORE_LIB -I$(QT_INC_DIR)/QtCore -I$(QT_INC_DIR)/QtWidgets $(QWT_CPPFLAGS) 
+
+
+# pkg-config --libs Qt5Gui.pc
+USR_LIB_NAMES=
+USR_LIB_DIRS =
+
+HEADERS=\
+TypedSpinBox.hpp \
+AnchoredSpinBox.hpp \
+AnchoredSpinBox.tpp \
+TriggeredSpinBox.hpp \
+TriggeredSpinBox.tpp \
+
+
+
+
+
+LIBRARY_NAME = GuiSsrd
+
+
+
+
+
+
+
+
+

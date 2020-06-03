@@ -1,0 +1,27 @@
+
+BIN_INST_DIR =$(DEVTOP)/bin
+LIB_INST_DIR =$(DEVTOP)/lib
+INC_INST_DIR =$(DEVTOP)/inc
+
+USR_CPPFLAGS =$(BOOST_CPPFLAGS)
+USR_CXXFLAGS =
+USR_LDFLAGS =
+USR_LDLIBS =
+
+BINARY_OBJ_NAMES = 
+
+BINARY_NAME =  
+BINARIES_NAMES =  
+
+
+HEADERS = \
+BootArch.h \
+BootUtil.h \
+BootParse.h
+
+ifeq ($(OS),Windows_NT)
+HEADERS += Windows/dirent.h
+endif
+
+LIBRARY_NAME = Boot
+LIBRARY_OBJ_NAMES = BootUtil BootParse BootArch

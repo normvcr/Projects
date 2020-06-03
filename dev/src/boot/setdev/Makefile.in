@@ -1,0 +1,44 @@
+
+BIN_INST_DIR =$(PLATBIN)
+LIB_INST_DIR =$(DEVTOP)/lib
+INC_INST_DIR =$(DEVTOP)/inc
+
+ifeq ($(OS),Windows_NT)
+SUBDIRS = Windows
+endif
+
+#The relative paths are used in the bootstrap process
+USR_CPPFLAGS =  \
+$(CLI11_CPPFLAGS) \
+$(BOOST_CPPFLAGS) \
+
+
+USR_CXXFLAGS =
+
+USR_LIB_DIRS= $(LIB_INST_DIR) $(BOOST_LIB_DIRS) 
+
+USR_LIB_NAMES =   Boot $(BOOST_LIB_NAMES)
+USR_LDLIBS = $(BOOST_LDLIBS)
+
+
+LIBRARY_NAME=
+
+BIN_OBJS += 
+
+BINARY_OBJ_NAMES = SetDevMain
+BIN_C_SRCS = 
+
+BINARY_NAME =setdev
+
+iog_KbdCodes_FLAGS = 
+
+HEADERS = \
+
+
+HEADERS_MV =\
+
+
+LIBRARY_NAME =  #IoGen
+
+
+

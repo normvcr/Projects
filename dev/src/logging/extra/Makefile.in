@@ -1,0 +1,45 @@
+
+
+BIN_INST_DIR =$(DEVTOP)/bin
+LIB_INST_DIR =$(DEVTOP)/lib
+INC_INST_DIR =$(DEVTOP)/inc
+
+BINARY_OBJ_NAMES = 
+BINARY_NAME = 
+BINARIES_NAMES = 
+
+
+# /usr/lib64/pkgconfig   Qt5.pc  Qt5Gui.pc  
+# pkg-config --cflags Qt5Gui.pc 
+# Needed by QT:
+#  -fPIC (added to the bldev linux config file)
+#   /EHsc (added to the bldev windows config file)
+USR_CPPFLAGS = $(BOOST_CPPFLAGS)
+
+USR_LIB_NAMES=
+USR_LIB_DIRS =	
+
+iog_GenLoggingExtra_FLAGS = -a -t ssrd_logging::LoggingLevel
+
+HEADERS=\
+GenLoggingExtra.hpp \
+
+HEADERS_MV =\
+iog_GenLoggingExtra.h \
+
+
+LIBRARY_NAME = Logging
+
+LIBRARY_OBJ_NAMES = \
+iog_GenLoggingExtra \
+
+
+
+
+
+
+
+
+
+
+

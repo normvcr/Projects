@@ -1,0 +1,31 @@
+include $(MAKEFILE_CFG)
+include $(PLATFORM_INC)
+
+bldevEXE = bldev$(EXE_SUFFIX)
+setdevEXE = setdev$(EXE_SUFFIX)
+setpaletteEXE = setpalette$(EXE_SUFFIX)
+
+everything :: $(bldevEXE) $(setdevEXE) 
+
+ifeq ($(OS),Windows_NT)
+everything :: $(setpaletteEXE)
+endif
+
+include $(MAKEFILE_INC)
+
+$(bldevEXE): $(BOBJS)
+	@echo Linking $@ ...
+	$(LINKER) $(LINKER_OUT_FLAG)$@ $(LDFLAGS) $(LDLIBS) $^
+
+$(setdevEXE): $(SOBJS)
+	@echo Linking $@ ...
+	$(LINKER) $(LINKER_OUT_FLAG)$@ $(LDFLAGS) $(LDLIBS) $^
+
+$(setpaletteEXE): $(POBJS)
+	@echo Linking $@ ...
+	$(LINKER) $(LINKER_OUT_FLAG)$@ $(LDFLAGS) $(LDLIBS) $^
+
+USR_LIB_NAMES = $(BOOST_LIB_NAMES)
+USR_LDLIBS = $(BOOST_LDLIBS)
+USR_LIB_DIRS = $(BOOST_LIB_DIRS)
+

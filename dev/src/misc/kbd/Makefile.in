@@ -1,0 +1,73 @@
+
+BIN_INST_DIR =$(DEVTOP)/bin
+LIB_INST_DIR =$(DEVTOP)/lib
+INC_INST_DIR =$(DEVTOP)/inc
+
+BINARY_OBJ_NAMES = 
+BINARIES_NAMES =
+BINARY_NAME = 
+PLAT_BINARY_NAME = 
+
+
+# /usr/lib64/pkgconfig   Qt5.pc  Qt5Gui.pc  
+# pkg-config --cflags Qt5Gui.pc 
+# Needed by QT:
+#  -fPIC (added to the bldev linux config file)
+#   /EHsc (added to the bldev windows config file)
+USR_CPPFLAGS = $(CLI11_CPPFLAGS) \
+$(BOOST_CPPFLAGS) \
+-I.
+
+USR_LIB_NAMES=
+USR_LIB_DIRS =
+
+HEADERS=\
+KbdCodes.hpp \
+
+HEADERS_MV =\
+KbdCodes.inc \
+
+LIBRARY_NAME = ssrdMisc
+
+LIBRARY_OBJ_NAMES = \
+
+# If you have iogen, generate operators << and >>
+# for the enum ssrd_kbd::KbdCodes
+ifneq ($(strip $(HAVE_IOGEN)),)
+HEADERS_MV += iog_KbdCodes.h
+LIBRARY_OBJ_NAMES += iog_KbdCodes
+endif
+
+KbdVkeyHeader.h: $(VKEY_HEADER)
+	echo \#include \"$(VKEY_HEADER)\" > $@
+
+inc2inc$(O_SUFFIX): KbdCodes.inc0
+
+ifeq ($(OS),Windows_NT)
+KbdCodes.inc: KbdVkeyHeader.h
+	meconv -i $< -o $@ -m VK_ -e $(VKEY_PREFIX)
+	appendvk -o $@ -e $(VKEY_PREFIX)
+else
+# The -2 flag generates KbdCodes.inc0 & KbdCodes.inc1
+# instead of just KbdCodes.inc
+KbdCodes.inc0: KbdVkeyHeader.h
+	meconv -i $< -o KbdCodes.inc -m KEY_ -e $(VKEY_PREFIX) -2
+
+#Converts  KbdCodes.inc0 & KbdCodes.inc1 to KbdCodes.inc
+KbdCodes.inc: inc2inc$(EXE_SUFFIX)
+	./inc2inc
+endif
+
+
+clean::
+	$(RM) KbdVkeyHeader.h  KbdCodes.inc0  KbdCodes.inc1 inc2inc
+
+
+
+
+
+
+
+
+
+

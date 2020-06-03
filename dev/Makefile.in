@@ -1,0 +1,14 @@
+
+#lib is here for  make clean
+#bin is not here for the same reason
+SUBDIRS = src lib inc #bin
+
+init:
+	echo Building and installing developoment utils
+	$(MAKE) -C src/boot incinst libs
+	$(MAKE) -C src/logging/src incinst libs
+	$(MAKE) -C src/iogen/src incinst libs
+	$(MAKE) -C src/iogen/iogen bins bininst
+	$(MAKE) -C src/iogen/meconv bins bininst
+	$(MAKE) -C src/misc/appendvk bins bininst
+

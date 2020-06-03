@@ -1,0 +1,6 @@
+
+SUBDIRS = appendvk replace
+
+ifneq ($(strip $(VKEY_HEADER)),)
+SUBDIRS += kbd
+endif

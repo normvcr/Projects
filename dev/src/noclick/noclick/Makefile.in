@@ -1,0 +1,95 @@
+
+#coredumpctl -o core -1 dump NoClickMain
+
+BIN_INST_DIR =$(DEVTOP)/bin
+LIB_INST_DIR =$(DEVTOP)/lib
+INC_INST_DIR =$(DEVTOP)/inc
+
+BIN_S_0 = NoClickMain NoClick NoClickWindow
+BINARY_OBJ_NAMES =  $(BIN_S_0) \
+$(MOC_S) $(IOG_S)
+
+MOC_S = moc_NoClickKbdBase
+
+iog_Action_FLAGS = -t ssrd_mouse::Action -s ""
+iog_PanesSet_FLAGS=-t ssrd_mouse::PanesType
+
+IOG_S = iog_PanesSet iog_NoClickAction
+
+ifeq ($(OS), Windows_NT)
+USR_LDFLAGSS += NoClick.res 
+endif
+
+
+#Do   make SUBSYSTEM_WINDOWS=1 bins
+ifeq ($(SUBSYSTEM_WINDOWS),1)
+BINARY_OBJ_NAMES += NoClickMain_Win
+endif
+
+
+BINARY_NAME = NoClick
+BINARIES_NAMES = 
+
+
+# /usr/lib64/pkgconfig   Qt5.pc  Qt5Gui.pc  
+# pkg-config --cflags Qt5Gui.pc 
+# Needed by QT: -fPIC
+USR_CPPFLAGS = -DQT_MESSAGELOGCONTEXT\
+ -DQT_GUI_LIB -I$(QT_INC_DIR)/QtGui -I$(QT_INC_DIR) -DQT_CORE_LIB -I$(QT_INC_DIR)/QtCore -I$(QT_INC_DIR)/QtWidgets -I$(QT_INC_DIR)/QtWebKitWidgets -I$(QT_INC_DIR)/QtWebEngineWidgets $(CLI11_CPPFLAGS) $(BOOST_CPPFLAGS)
+
+LIBRARY_NAME = NoClick
+
+LIBRARY_OBJ_NAMES = \
+NoClickHotCursor\
+NoClickLabel\
+NoClickActive\
+LeftClickPane\
+RightClickPane\
+DClickPane\
+DragPane\
+NoClickPanes\
+NoClickPanesSquare\
+NoClickPanesLine\
+NoClickPane\
+NoClickSettings \
+NoClickDetailsWindow \
+NoClickPanesWindow \
+ActiveHotKey \
+NoClickUtils \
+PanesSet \
+PanesSetSquare \
+PanesSetLine \
+NoClickQMenu \
+
+ifeq ($(OS), Windows_NT)
+LIBRARY_OBJ_NAMES += NoClickKbd_Win
+else
+LIBRARY_OBJ_NAMES += NoClickKbd_GLib
+endif
+
+
+all:: bins doc
+
+doc: $(SOURCE_DIR)/NoClick.html 
+	$(CP) $^ /home/norm30/.config/SystemSolutionsRD
+
+HEADERS= \
+
+USR_LDFLAGS =
+
+# pkg-config --libs Qt5Gui.pc
+USR_LIB_NAMES = NoClick ssrdMisc Boot  IoGen Logging \
+Qt5Widgets Qt5Gui Qt5Core  $(BOOST_LIB_NAMES)
+
+USR_LDLIBS = $(BOOST_LDLIBS)
+
+ifeq ($(OS), Windows_NT)
+USR_LIB_NAMES += Qt5WebEngineWidgets User32
+else
+USR_LIB_NAMES += GuiSsrd Qt5WebKit Qt5WebKitWidgets atspi glib-2.0 dbus-1 X11
+endif
+
+USR_LIB_DIRS= $(LIB_INST_DIR) $(QT_LIB_DIRS) $(QWT_LIB_DIR) $(BOOST_LIB_DIRS)
+
+.rc.res:
+	rc -V -Fo $@ -DICONFILE=$(RESOURCE_DIR)/NoClick/noclickIcon.ico $^ 

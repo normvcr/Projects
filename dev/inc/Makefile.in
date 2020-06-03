@@ -1,0 +1,7 @@
+
+
+SUBDIRS =
+
+clean::
+	$(RM) *.h *.hpp *.tpp *.inc GenLogging_*
+

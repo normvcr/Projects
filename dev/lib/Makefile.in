@@ -1,0 +1,6 @@
+
+
+SUBDIRS =
+
+clean::
+	$(RM) *.lib

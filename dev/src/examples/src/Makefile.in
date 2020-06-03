@@ -1,0 +1,41 @@
+
+#Don't mix examples stuff with regular development
+BIN_INST_DIR = ..
+LIB_INST_DIR = ..
+INC_INST_DIR = ..
+
+USR_CPPFLAGS = -I. $(BOOST_CPPFLAGS) $(CLI11_CPPFLAGS) -I$(DEVTOP)/inc
+
+USR_LIB_DIRS = $(DEVTOP)/lib $(LIB_INST_DIR) $(BOOST_LIB_DIRS) 
+
+USR_LIB_NAMES0 = Boot IoGen Logging $(BOOST_LIB_NAMES)
+USR_LDLIBS =  $(BOOST_LDLIBS)
+
+BINARIES_NAMES += loggingEx meconvEx
+
+ifneq ($(HAVE_IOGEN),)
+LIBRARY_NAME = Ex
+BINARIES_NAMES += iogenEx
+LIBRARY_OBJ_NAMES += iog_iogenEx
+USR_LIB_NAMES = Ex $(USR_LIB_NAMES0)
+else
+USR_LIB_NAMES = $(USR_LIB_NAMES0)
+endif
+
+
+clean::
+	$(RM) Params.txt meconvEx.inc
+
+############ meconv example ######################
+incinst:: meconvEx.inc
+
+# Convert SEEK_ macro values to E_ enum values
+# See meconvEx.hpp and meconvEx.cpp
+meconvEx.inc: meconvEx.hpp
+	touch $@  #Needs to exist, as is included by meconvEx.hpp
+	meconv -i $< -o $@ -m SEEK_ -e E_
+###################################################
+
+t:
+	@echo HAVE_IOGEN=$(HAVE_IOGEN)
+	@echo LIBRARY_NAME=$(LIBRARY_NAME)
