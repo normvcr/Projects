@@ -149,7 +149,7 @@ int mainBody( int argc, char* argv[] )
   QCoreApplication::setApplicationName("NoClick");
   // for Mac:
   QCoreApplication::setOrganizationDomain("SystemSolutionsRD.com");
-  QCoreApplication::setApplicationVersion("0.86");
+  QCoreApplication::setApplicationVersion("1.0");
   
 
   //--------- Set up command line parser
