@@ -66,7 +66,7 @@ namespace ssrd_mouse {
 
   bool SETT_DECDEF( writeIniFileNameToScreen, System/writeIniFileNameToScreen );
   int SETT_DECDEF( lowestLoggingLevel, System/lowestLoggingLevel );
-  double SETT_DECDEF( speedScaleFactor, System/speedScaleFactor );
+  //double SETT_DECDEF( speedScaleFactor, System/speedScaleFactor );
 
   int SETT_DECDEF( mouseInterval, Mouse/timeInterval_ms );
   int SETT_DECDEF( mouseStationaryThreshold,

@@ -54,7 +54,12 @@ The colour of the two cross-hairs of the cursor.
   <h3>timeInterval_ms [integer]</h3>
   This is how often the variable, <em>stationaryDuration_</em>, is checked to see if the mouse is stationary.  The labels/buttons in the GUI are activated by the mouse coming to stop in the label.
 
-   <h2>Panes</h2>
+  <h3>allowHover</h3>
+  When set, hovering will switch Show to Hide.
+
+  <h2>Panes</h2>
+  <h3>movingTimeCutoff_ms</h3>
+  How long for the mouse and star to disappear when the mouse starts moving.
   <h3>sideLength_pix [integer]</h3>
  Each of the 4 "click" panes is a square of this side length.
 
@@ -62,13 +67,22 @@ The colour of the two cross-hairs of the cursor.
  How many pixels the left-most and right-most panes are displaced vertically in the Line configuration type of the click panes.
 
   <h3>type [string]</h3>
- Either Line or Square, for the confguration type of the click panes.
+ Either LinePanesTypoe or SquarePanesType, for the confguration type of the click panes.
 
   <h3>hotPointOffset_pix [integer]</h3>
   This indicates how far the outside corner of the LeftClick pane is  from the mouse:  The line segment  joinging the outside corner and the mouse is the hypotenuse of an isoscelese right triangle, with each leg having length hotPointOffset.
 
-  <h3>movingBTimeCutoff_ms [integer] </h3>
-  The time interval at the start of every contiguous motion during 2-stage Drag,  after which the Red Star and Panes will be hidden.
+  <h3>opacity</h3>
+  A real number between 0 and 1.
+
+  <h3>borderWidth_pix</h3>
+  Width of pane border with Linear panes arrangement.
+
+  <h3>borderColor</h3>
+  This color is used with Linear panes when the borderWidth_pix < 0.
+
+  <h3>borderOpacity</h3>
+  The opacity of the pane borders with the Linear pane configuration.
 
   <h3>leftClickColor [string] </h3>
 
@@ -77,12 +91,15 @@ The colour of the two cross-hairs of the cursor.
   <h3>dClickColor [string] </h3>
 
   <h3>dragColor [string] </h3>
-The colour for the corresponding pane.
+  The colour for the corresponding pane.
 
   <h2>Drag</h2>
  
     <h3> stopDelay_ms [integer] </h3>
-    During a drag, this is how long the mouse can be statinary for, before the drag is ended.
+    During a 1-Stage drag, this is how long the mouse can be statinary for, before the drag is ended.
+
+    <h3> stopDelay2_ms [integer] </h3>
+    During a 2-stage drag, this is how long the mouse can be statinary for, before the second stage of the drag is ended.
 
     <h3> type [integer] </h3>
     This is the type of drag that the Drag pane actives -- either 1 or 2, corresponding, respectively to a 1-stage Drag or a 2-stage Drag.
@@ -92,19 +109,34 @@ The colour of the drag radio buttons when that stage of a drag is active.
 
 <h2>Star</h2>
 "Star" refers to the red box that appears on the screen (originaly planned it to be a star).
-The settings are  similar to Panes.  The ones that are different are listed, here.
+        <h3>color</h3>
+    Color of the star.
+
+    <h3>opacity</h3>
+    Opacity of the star.
+
+    <h3>hotPointOffset_pix</h3>
+    Distance of star from the hot point.
+
+    <h3>sideLength_pix</h3>
+    Side length of the star
+
     <h3>axisAngle_deg [float]</h3>
     In order for the Click Panes to appear, the mouse must move into the cone having its vertex at the mouse, its centre line (axis) joing with the Star, and the cone sides make an angle of, axisAngle, with the axis.
     
      <h3>stationaryTimeAppear_ms [int]</h3>
     How long it takes the red box to appear, once the mouse has become stationary.  If this is too small, it causes flickering of the red box.
      <h3>stationaryTimeCutoff_ms [int]</h3>
-    How long the red box stays visible once the mouse has become stationary.
+     How long the red box stays visible once the mouse has become stationary.
+
+     
    <h2>Action</h2>
     The actions are intiated from the four click panes.
     <h3>timeInterval_ms [integer]</h3>
     How often the action, if any, is attended to.  This setting sets a timer.
 
+
+    
     <h2>System</h2>
  
      <h3>lowestLoggingLevel [integer]</h3>
@@ -121,29 +153,6 @@ The settings are  similar to Panes.  The ones that are different are listed, her
      <h3>writeIniFileNameToScreen [boolean]</h3>
      This is a convenience, as the ini file name contains the full path to where NoClick also keeps this help file and the log file.
 
-     <h3>speedScaleFactor [double]</h3>
-     This is the value of the slider in the main GUI, and is used to scale the 5 values: starStationaryTimeCutoff, starStationaryTimeAppear, panesMovingTimeCutoff, mouseStationaryThreshold and dragStopDelay.  NoClick uses the scaled values.  A scale factor of 1 means no change.  A scale factor bigger than 1 means the system is "speeded up", as all the time intervals are decreased (the 5 values are divided by the scale factor).  The scale factor does not alter the values in the ini file -- only the values that NoClick uses.
-
-     <h2>Slider</h2>
-     This section has 16 double values for both endpoints of the 8 sliders in the GUI.
-     <ul>
-<li>dragStopMax_ms</li>
-<li>dragStopMin_ms</li>
-<li>mouseStationaryMax_ms</li>
-<li>mouseStationaryMin_ms</li>
-<li>panesMovingMax_ms -- Apparatus moving</li>
-<li>panesMovingMin_ms -- Apparatus moving</li>
-<li>panesStationaryMax_ms</li>
-<li>panesStationaryMin_ms</li>
-<li>samplerActionMax_hz</li>
-<li>samplerActionMin_hz</li>
-<li>samplerLabelMax_hz -- Sampler button</li>
-<li>samplerLabelMin_hz -- Sampler button</li>
-<li>samplerPositionMax_hz</li>
-<li>samplerPositionMin_hz</li>
-<li>starStationaryMax_ms</li>
-<li>starStationaryMin_ms</li>
-</ul>
 
 </body>
 </html>

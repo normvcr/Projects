@@ -71,7 +71,7 @@ endif
 all:: bins doc
 
 doc: $(SOURCE_DIR)/NoClick.html 
-	$(CP) $^ /home/norm30/.config/SystemSolutionsRD
+	$(CP) $^ /home/norm32/.config/SystemSolutionsRD
 
 HEADERS= \
 
